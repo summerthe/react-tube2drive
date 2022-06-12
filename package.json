@@ -1,0 +1,61 @@
+{
+  "name": "tube2drive",
+  "private": true,
+  "version": "1.0.0",
+  "description": "UI For Tube2Drive using Vite and React.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prettier-format": "prettier --config .prettierrc.json '.' --write",
+    "lint": "eslint . --ext .ts,.tsx,.js,jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,jsx --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "1.8.2",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-helmet": "6.1.0",
+    "react-redux": "8.0.2",
+    "react-router-dom": "6.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.12",
+    "@types/react-dom": "18.0.5",
+    "@types/react-helmet": "6.1.5",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
+    "@vitejs/plugin-react": "1.3.2",
+    "eslint": "8.17.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-typescript": "3.0.0",
+    "eslint-import-resolver-typescript": "2.7.1",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.30.0",
+    "eslint-plugin-react-hooks": "4.5.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "husky": "^4.3.8",
+    "lint-staged": "13.0.1",
+    "prettier": "2.6.2",
+    "sass": "1.52.3",
+    "typescript": "4.7.3",
+    "vite": "2.9.12"
+  },
+  "author": "summer",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm run prettier-format",
+      "npm run lint:fix"
+    ]
+  }
+}

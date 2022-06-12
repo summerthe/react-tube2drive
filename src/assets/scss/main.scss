@@ -1,0 +1,240 @@
+@import './util';
+@import './variables';
+@import './font-faces';
+@import './mixins';
+nav {
+  padding-top: 30px;
+  background-color: $bg-color;
+  width: 100px; // 70pxW + 15 margin, 50pxW + auto
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  @media screen and (max-width: 700px) {
+    & {
+      display: none;
+    }
+    &.show-mobile {
+      display: block;
+      position: fixed;
+    }
+  }
+  ul {
+    li {
+      list-style-type: none;
+      margin-bottom: 30px;
+      &.logo {
+        img {
+          width: 70px;
+          height: auto;
+        }
+        margin-bottom: 100px;
+        & a:focus {
+          outline: 1px solid $outline-color;
+        }
+      }
+      a,
+      div {
+        cursor: pointer;
+        text-decoration: none;
+        color: $text-secondary-color;
+        @extend .flex-center;
+        .icon {
+          width: 32px;
+          height: auto;
+        }
+        &.active {
+          color: $white;
+        }
+        &:hover,
+        &:focus {
+          outline: none;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+main {
+  min-height: 100vh;
+  flex: 1;
+  background-color: #171721;
+  header {
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (max-width: 700px) {
+      padding: 30px 12px;
+    }
+    h1 {
+      @include get-font('Nunito', 24px, 28px);
+    }
+    button {
+      .icon {
+        @extend .flex-center;
+        padding: 4px;
+      }
+      border-radius: 4px;
+      outline: 0;
+      border: 0;
+      svg {
+        width: 26px;
+        height: 26px;
+      }
+    }
+    border-bottom: 1px solid #232332;
+  }
+  section.form {
+    margin: auto;
+    margin-top: 40px;
+    max-width: 540px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: $bg-color;
+    @media screen and (max-width: 700px) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media screen and (max-width: 564px) {
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+    form {
+      h2 {
+        @include get-font('Nunito', 25px);
+      }
+      .inputs {
+        margin-top: 20px;
+        .input-container {
+          margin-top: 10px;
+          label {
+            @include get-font('Nunito', 14px, 22px, 400, $text-secondary-color);
+            display: block;
+            margin: 8px 0;
+          }
+          input {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: transparent;
+            width: 100%;
+            height: 52px;
+            border: 1px solid #30303e;
+            border-radius: 10px;
+            @include get-font('Nunito', 14px, 22px);
+            &:focus {
+              outline: 4px solid $outline-color;
+            }
+            @media screen and (max-width: 700px) {
+              padding: 8px 15px;
+              font-size: 16px;
+            }
+          }
+        }
+        .errors,
+        .notes {
+          margin: 10px 0;
+          ul {
+            li {
+              list-style: none;
+              display: block;
+              @include get-font(
+                'Nunito',
+                12px,
+                $font-weight: bold,
+                $color: #863e3e
+              );
+              display: block;
+              margin: 8px 0;
+            }
+          }
+        }
+        .notes {
+          ul {
+            li {
+              color: $text-secondary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  section.table {
+    margin: auto;
+    margin-top: 40px;
+    max-width: 1140px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: $bg-color;
+    @media screen and (max-width: 1260px) {
+      max-width: 940px;
+    }
+    @media screen and (max-width: 1060px) {
+      max-width: 740px;
+    }
+    @media screen and (max-width: 860px) {
+      max-width: 90%;
+    }
+    @media screen and (max-width: 660px) {
+      max-width: 94%;
+    }
+    table {
+      min-width: 440px;
+      table-layout: fixed;
+      width: 100%;
+      thead,
+      tbody {
+        tr {
+          th {
+            padding-top: 18px;
+            padding-bottom: 18px;
+          }
+          td,
+          th {
+            padding-top: 14px;
+            padding-bottom: 14px;
+            @include get-font('Nunito', 14px, 14px, $color: #6c6c6e);
+            text-align: left;
+            &.no-records {
+              color: white;
+            }
+            .stack {
+              display: inline-flex;
+              flex-direction: column;
+              a {
+                text-decoration: none;
+                &:focus,
+                &:active {
+                  outline: 1px solid $outline-color;
+                }
+              }
+              .title {
+                color: $white;
+              }
+              .subtitle {
+                font-size: 12px;
+                margin-top: 10px;
+              }
+            }
+            .status-badge {
+              padding: 6px 12px;
+              border-radius: 5px;
+              background: #30303f;
+              width: max-content;
+              color: $white;
+              &.completed {
+                color: #5fdba7;
+                background: #283438;
+              }
+              &.failed {
+                color: #fb2f41;
+                background: #38232e;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
