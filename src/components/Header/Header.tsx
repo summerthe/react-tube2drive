@@ -14,7 +14,7 @@ function Header({ title }: { title: string }): JSX.Element {
       <h1>{title}</h1>
       <button
         className="mobile-only"
-        aria-label="Open the menu"
+        aria-label="Toggle navigation menu"
         type="button"
         onClick={() => dispatch(toggleIsMobileOpen())}>
         <span className="icon">
@@ -24,6 +24,7 @@ function Header({ title }: { title: string }): JSX.Element {
               className="h-5 w-5"
               viewBox="0 0 20 20"
               fill="currentColor">
+              <title>Open navigation menu</title>
               <path
                 fillRule="evenodd"
                 d={`M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 
@@ -40,6 +41,7 @@ function Header({ title }: { title: string }): JSX.Element {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}>
+              <title>Close navigation menu</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

@@ -2,11 +2,16 @@
 @import './variables';
 @import './font-faces';
 @import './mixins';
+html,
+body {
+  background-color: $bg-color;
+}
 nav {
   padding-top: 30px;
-  background-color: $bg-color;
+  background-color: $nav-bg-color;
   width: 100px; // 70pxW + 15 margin, 50pxW + auto
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   position: sticky;
   top: 0;
   @media screen and (max-width: 700px) {
@@ -57,7 +62,7 @@ nav {
 main {
   min-height: 100vh;
   flex: 1;
-  background-color: #171721;
+  background-color: $bg-color;
   header {
     padding: 30px 40px;
     display: flex;
@@ -78,8 +83,11 @@ main {
       outline: 0;
       border: 0;
       svg {
-        width: 26px;
-        height: 26px;
+        width: 30px;
+        height: 30px;
+      }
+      &:focus {
+        outline: 4px solid $outline-color;
       }
     }
     border-bottom: 1px solid #232332;
@@ -90,7 +98,7 @@ main {
     max-width: 540px;
     border-radius: 10px;
     padding: 20px;
-    background-color: $bg-color;
+    background-color: $nav-bg-color;
     @media screen and (max-width: 700px) {
       margin-left: auto;
       margin-right: auto;
@@ -161,12 +169,14 @@ main {
     }
   }
   section.table {
+    width: 100vw;
+    overflow-x: auto;
     margin: auto;
     margin-top: 40px;
     max-width: 1140px;
     border-radius: 10px;
     padding: 20px;
-    background-color: $bg-color;
+    background-color: $nav-bg-color;
     @media screen and (max-width: 1260px) {
       max-width: 940px;
     }
@@ -180,7 +190,7 @@ main {
       max-width: 94%;
     }
     table {
-      min-width: 440px;
+      min-width: 470px;
       table-layout: fixed;
       width: 100%;
       thead,
@@ -194,7 +204,7 @@ main {
           th {
             padding-top: 14px;
             padding-bottom: 14px;
-            @include get-font('Nunito', 14px, 14px, $color: #6c6c6e);
+            @include get-font('Nunito', 14px, 14px, $color: #9494a0);
             text-align: left;
             &.no-records {
               color: white;
