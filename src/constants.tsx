@@ -45,8 +45,8 @@ const constants = {
     },
     CREATE: {
       key: 'CREATE',
-      title: 'Create new upload request',
-      header: 'Create new upload request',
+      title: 'Create new request',
+      header: 'Create new request',
       subheader: 'New request',
       path: '/create/',
     },

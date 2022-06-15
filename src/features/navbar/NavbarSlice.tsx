@@ -22,10 +22,14 @@ const navbarSlice = createSlice({
     toggleIsMobileOpen: state => {
       state.isMobileOpen = !state.isMobileOpen
     },
+    closeIsMobileOpen: state => {
+      state.isMobileOpen = false
+    },
   },
 })
 
-export const { setCurrentPageKey, toggleIsMobileOpen } = navbarSlice.actions
+export const { setCurrentPageKey, toggleIsMobileOpen, closeIsMobileOpen } =
+  navbarSlice.actions
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const selectNavbar = (state: RootState) => state.navbar
 export default navbarSlice.reducer

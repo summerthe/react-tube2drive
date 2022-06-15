@@ -2,11 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/img/logo.webp'
 import constants from '../../constants'
-import { selectNavbar } from '../../features/navbar/NavbarSlice'
-import { useAppSelector } from '../../store'
+import {
+  selectNavbar,
+  closeIsMobileOpen,
+} from '../../features/navbar/NavbarSlice'
+import { useAppDispatch, useAppSelector } from '../../store'
 
 function Navbar(): JSX.Element {
   const { isMobileOpen, currentPageKey } = useAppSelector(selectNavbar)
+  const dispatch = useAppDispatch()
   return (
     <nav
       role="navigation"
@@ -14,13 +18,16 @@ function Navbar(): JSX.Element {
       className={isMobileOpen ? 'show-mobile' : ''}>
       <ul>
         <li className="logo">
-          <Link to={constants.pages.INDEX.path}>
+          <Link
+            to={constants.pages.INDEX.path}
+            onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}>
             <img src={logo} alt="Logo of Tube2Drive" />
           </Link>
         </li>
         <li>
           <Link
             to={constants.pages.INDEX.path}
+            onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
             className={
               currentPageKey === constants.pages.INDEX.key ? 'active' : ''
             }>
@@ -48,6 +55,7 @@ function Navbar(): JSX.Element {
         <li>
           <Link
             to={constants.pages.CREATE.path}
+            onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
             className={
               currentPageKey === constants.pages.CREATE.key ? 'active' : ''
             }>
@@ -73,6 +81,7 @@ function Navbar(): JSX.Element {
         <li>
           <Link
             to={constants.pages.LOGIN.path}
+            onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
             className={
               currentPageKey === constants.pages.LOGIN.key ? 'active' : ''
             }>
