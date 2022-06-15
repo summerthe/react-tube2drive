@@ -7,10 +7,12 @@ import AppRoutes from './routes/AppRoutes/AppRoutes'
 import { store } from './store'
 
 const container = document.getElementById('root')
-const root = createRoot(container!)
+if (container) {
+  const root = createRoot(container)
 
-root.render(
-  <Provider store={store}>
-    <AppRoutes />
-  </Provider>
-)
+  root.render(
+    <Provider store={store}>
+      <AppRoutes />
+    </Provider>
+  )
+}

@@ -6,7 +6,7 @@ import { selectNavbar } from '../../features/navbar/NavbarSlice'
 import { useAppSelector } from '../../store'
 
 function Navbar(): JSX.Element {
-  const { isMobileOpen } = useAppSelector(selectNavbar)
+  const { isMobileOpen, currentPageKey } = useAppSelector(selectNavbar)
   return (
     <nav
       role="navigation"
@@ -19,7 +19,11 @@ function Navbar(): JSX.Element {
           </Link>
         </li>
         <li>
-          <Link to={constants.pages.INDEX.path} className="active">
+          <Link
+            to={constants.pages.INDEX.path}
+            className={
+              currentPageKey === constants.pages.INDEX.key ? 'active' : ''
+            }>
             <span className="icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +46,11 @@ function Navbar(): JSX.Element {
           </Link>
         </li>
         <li>
-          <Link to={constants.pages.CREATE.path}>
+          <Link
+            to={constants.pages.CREATE.path}
+            className={
+              currentPageKey === constants.pages.CREATE.key ? 'active' : ''
+            }>
             <span className="icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +71,11 @@ function Navbar(): JSX.Element {
           </Link>
         </li>
         <li>
-          <Link to={constants.pages.LOGIN.path}>
+          <Link
+            to={constants.pages.LOGIN.path}
+            className={
+              currentPageKey === constants.pages.LOGIN.key ? 'active' : ''
+            }>
             <span className="icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

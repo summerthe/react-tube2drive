@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import DateStack from '../../components/DateStack/DateStack'
 import Header from '../../components/Header/Header'
 import constants from '../../constants'
+import { setCurrentPageKey } from '../../features/navbar/NavbarSlice'
+import { useAppDispatch } from '../../store'
 import IUploadRequest from '../../types'
 
 function Index(): JSX.Element {
   const tableColumns = ['Youtube', 'Drive', 'Status', 'Last Updated', 'Created']
   const records: IUploadRequest[] = []
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    type currentPageKeyOptions = keyof typeof constants.pages
+    const currentPage = constants.pages.INDEX.key as currentPageKeyOptions
+    dispatch(setCurrentPageKey(currentPage))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <>
       <main>

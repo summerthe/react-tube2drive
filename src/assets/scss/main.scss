@@ -34,7 +34,7 @@ nav {
         }
         margin-bottom: 100px;
         & a:focus {
-          outline: 1px solid $outline-color;
+          outline: 4px solid $outline-color;
         }
       }
       a,
@@ -50,9 +50,14 @@ nav {
         &.active {
           color: $white;
         }
-        &:hover,
-        &:focus {
-          outline: none;
+        &:hover {
+          color: $white;
+          outline: 0;
+        }
+
+        &:focus,
+        &:active {
+          outline: 4px solid $outline-color;
           color: $white;
         }
       }
@@ -151,7 +156,7 @@ main {
                 'Nunito',
                 12px,
                 $font-weight: bold,
-                $color: #863e3e
+                $color: #d88383
               );
               display: block;
               margin: 8px 0;
@@ -204,7 +209,12 @@ main {
           th {
             padding-top: 14px;
             padding-bottom: 14px;
-            @include get-font('Nunito', 14px, 14px, $color: #9494a0);
+            @include get-font(
+              'Nunito',
+              14px,
+              14px,
+              $color: $text-secondary-color
+            );
             text-align: left;
             &.no-records {
               color: white;
