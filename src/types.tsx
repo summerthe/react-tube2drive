@@ -2,6 +2,16 @@ import constants from './constants'
 
 type uploadRequestStatusType = keyof typeof constants.uploadRequestStatus
 
+export interface ILoginForm {
+  email: string
+  password: string
+}
+
+export interface ILoginFormResponse {
+  refresh: string
+  access: string
+}
+
 export default interface IUploadRequest {
   id: string
   uuid: string

@@ -3,10 +3,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import navbarReducer from './features/navbar/NavbarSlice'
+import authReducer from './features/auth/AuthSlice'
 
 export const store = configureStore({
   reducer: {
     navbar: navbarReducer,
+    auth: authReducer,
   },
 })
 

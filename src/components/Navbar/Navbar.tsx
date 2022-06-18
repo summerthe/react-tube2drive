@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/img/logo.webp'
 import constants from '../../constants'
+import { selectAuth } from '../../features/auth/AuthSlice'
 import {
   selectNavbar,
   closeIsMobileOpen,
@@ -11,6 +12,8 @@ import { useAppDispatch, useAppSelector } from '../../store'
 function Navbar(): JSX.Element {
   const { isMobileOpen, currentPageKey } = useAppSelector(selectNavbar)
   const dispatch = useAppDispatch()
+  const { isAuthenticated } = useAppSelector(selectAuth)
+
   return (
     <nav
       role="navigation"
@@ -52,59 +55,92 @@ function Navbar(): JSX.Element {
             </span>
           </Link>
         </li>
-        <li>
-          <Link
-            to={constants.pages.CREATE.path}
-            onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
-            className={
-              currentPageKey === constants.pages.CREATE.key ? 'active' : ''
-            }>
-            <span className="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2">
-                <title>{constants.pages.CREATE.title}</title>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                />
-              </svg>
-              <span className="sr-only">{constants.pages.CREATE.title}</span>
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link
-            to={constants.pages.LOGIN.path}
-            onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
-            className={
-              currentPageKey === constants.pages.LOGIN.key ? 'active' : ''
-            }>
-            <span className="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2">
-                <title>{constants.pages.LOGIN.title}</title>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d={`M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0
-                  01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z`}
-                />
-              </svg>
-              <span className="sr-only">{constants.pages.LOGIN.title}</span>
-            </span>
-          </Link>
-        </li>
+        {isAuthenticated ? (
+          <>
+            <li>
+              <Link
+                to={constants.pages.CREATE.path}
+                onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
+                className={
+                  currentPageKey === constants.pages.CREATE.key ? 'active' : ''
+                }>
+                <span className="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2">
+                    <title>{constants.pages.CREATE.title}</title>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                    />
+                  </svg>
+                  <span className="sr-only">
+                    {constants.pages.CREATE.title}
+                  </span>
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={constants.pages.LOGOUT.path}
+                onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}>
+                <span className="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}>
+                    <title>{constants.pages.LOGOUT.title}</title>
+                    <path
+                      fillRule="evenodd"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 
+                      3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="sr-only">
+                    {constants.pages.LOGOUT.title}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <Link
+              to={constants.pages.LOGIN.path}
+              onClick={() => isMobileOpen && dispatch(closeIsMobileOpen())}
+              className={
+                currentPageKey === constants.pages.LOGIN.key ? 'active' : ''
+              }>
+              <span className="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}>
+                  <title>{constants.pages.LOGIN.title}</title>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2
+                     2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
+                  />
+                </svg>
+                <span className="sr-only">{constants.pages.LOGIN.title}</span>
+              </span>
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   )

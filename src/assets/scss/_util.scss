@@ -1,3 +1,4 @@
+@import 'mixins';
 .flex {
   display: flex;
 }
@@ -56,4 +57,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error-item {
+  list-style: none;
+  display: block;
+  @include get-font('Nunito', 12px, $font-weight: bold, $color: #d88383);
+  display: block;
+  margin: 8px 0;
 }
