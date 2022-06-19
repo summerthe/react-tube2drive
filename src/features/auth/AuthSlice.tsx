@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
 
-export const initialState = {
-  // Convert to boolean
-  isAuthenticated: !!localStorage.getItem('access'),
+const getInitialState = (): { isAuthenticated: boolean } => {
+  return {
+    isAuthenticated: !!localStorage.getItem('access'),
+  }
 }
+
+export const initialState = getInitialState()
 
 const authSlice = createSlice({
   name: 'auth',
@@ -14,7 +17,7 @@ const authSlice = createSlice({
       state.isAuthenticated = action.payload
     },
     resetAuthState: () => {
-      return initialState
+      return getInitialState()
     },
   },
 })

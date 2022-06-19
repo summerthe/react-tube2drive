@@ -101,7 +101,7 @@ function Index(): JSX.Element {
                         <a
                           href={record.playlist_link}
                           target="_blank"
-                          className="title"
+                          className="title external"
                           rel="noreferrer nofollow">
                           {record.playlist_name}
                         </a>
@@ -112,7 +112,7 @@ function Index(): JSX.Element {
                         <a
                           href={record.folder_link}
                           target="_blank"
-                          className="title"
+                          className="title external"
                           rel="noreferrer nofollow">
                           Open Folder
                         </a>

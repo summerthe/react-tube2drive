@@ -21,7 +21,7 @@ const uploadRequestSlice = createSlice({
       state.hasFetched = action.payload
     },
     appendUploadRequests: (state, action: PayloadAction<IUploadRequest>) => {
-      state.uploadRequests.push(action.payload)
+      state.uploadRequests.unshift(action.payload)
     },
     resetUploadRequestState: () => {
       return initialState
