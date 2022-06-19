@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
+import { useSearchParams } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import Header from '../../components/Header/Header'
 import constants from '../../constants'
@@ -20,6 +21,7 @@ function Login(): JSX.Element {
 
   const { register, handleSubmit } = useForm<ILoginForm>()
   const { isAuthenticated } = useAppSelector(selectAuth)
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     type currentPageKeyOptions = keyof typeof constants.pages
@@ -29,7 +31,11 @@ function Login(): JSX.Element {
   }, [])
 
   if (isAuthenticated) {
-    // if user is already authenticated navigate to home page
+    // if user is already authenticated navigate to success page
+    const nextPage = searchParams.get('next')
+    if (nextPage) {
+      return utils.navigateTo(nextPage)
+    }
     return utils.navigateTo(constants.pages.INDEX.path)
   }
 

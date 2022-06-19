@@ -12,8 +12,8 @@ function Logout(): JSX.Element {
     localStorage.removeItem('access')
     localStorage.removeItem('refresh')
     // remove current user's every state
-    dispatch(resetAuthState())
     dispatch(resetUploadRequestState())
+    dispatch(resetAuthState())
   })
   return utils.navigateTo(constants.pages.LOGIN.path)
 }

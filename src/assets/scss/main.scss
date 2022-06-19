@@ -14,6 +14,7 @@ nav {
   height: 100%;
   position: sticky;
   top: 0;
+  z-index: 10000;
   @media screen and (max-width: 700px) {
     & {
       display: none;
@@ -177,6 +178,7 @@ main {
     overflow-x: auto;
     margin: auto;
     margin-top: 40px;
+    margin-bottom: 40px;
     max-width: 1140px;
     border-radius: 10px;
     padding: 20px;
@@ -194,7 +196,7 @@ main {
       max-width: 94%;
     }
     table {
-      min-width: 470px;
+      min-width: 540px;
       table-layout: fixed;
       width: 100%;
       thead,
@@ -222,6 +224,7 @@ main {
               display: inline-flex;
               flex-direction: column;
               align-items: flex-end;
+              white-space: nowrap;
               a {
                 display: flex;
                 justify-content: center;

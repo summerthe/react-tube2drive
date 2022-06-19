@@ -22,14 +22,7 @@ function AppRoutes(): JSX.Element {
             }
           />
           <Route path={constants.pages.LOGIN.path} element={<Login />} />
-          <Route
-            path={constants.pages.LOGOUT.path}
-            element={
-              <ProtectedRoutes>
-                <Logout />
-              </ProtectedRoutes>
-            }
-          />
+          <Route path={constants.pages.LOGOUT.path} element={<Logout />} />
           <Route
             path={constants.pages.CREATE.path}
             element={
