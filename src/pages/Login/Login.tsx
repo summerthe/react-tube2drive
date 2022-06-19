@@ -19,6 +19,7 @@ function Login(): JSX.Element {
   })
 
   const { register, handleSubmit } = useForm<ILoginForm>()
+  const { isAuthenticated } = useAppSelector(selectAuth)
 
   useEffect(() => {
     type currentPageKeyOptions = keyof typeof constants.pages
@@ -26,8 +27,6 @@ function Login(): JSX.Element {
     dispatch(setCurrentPageKey(currentPage))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const { isAuthenticated } = useAppSelector(selectAuth)
 
   if (isAuthenticated) {
     // if user is already authenticated navigate to home page

@@ -4,11 +4,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import navbarReducer from './features/navbar/NavbarSlice'
 import authReducer from './features/auth/AuthSlice'
+import uploadRequestReducer from './features/uploadRequest/UploadRequestSlice'
 
 export const store = configureStore({
   reducer: {
     navbar: navbarReducer,
     auth: authReducer,
+    uploadRequest: uploadRequestReducer,
   },
 })
 

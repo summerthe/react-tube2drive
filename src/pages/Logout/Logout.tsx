@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import constants from '../../constants'
-import { setAuthenticated } from '../../features/auth/AuthSlice'
+import { resetAuthState } from '../../features/auth/AuthSlice'
+import { resetUploadRequestState } from '../../features/uploadRequest/UploadRequestSlice'
 import { useAppDispatch } from '../../store'
 import utils from '../../utils'
 
@@ -10,7 +11,9 @@ function Logout(): JSX.Element {
   useEffect(() => {
     localStorage.removeItem('access')
     localStorage.removeItem('refresh')
-    dispatch(setAuthenticated(false))
+    // remove current user's every state
+    dispatch(resetAuthState())
+    dispatch(resetUploadRequestState())
   })
   return utils.navigateTo(constants.pages.LOGIN.path)
 }

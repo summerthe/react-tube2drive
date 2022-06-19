@@ -12,15 +12,24 @@ export interface ILoginFormResponse {
   access: string
 }
 
+export interface IAccessTokenResponse {
+  access: string
+}
+
 export default interface IUploadRequest {
   id: string
-  uuid: string
+  guid: string
   playlist_link: string
   playlist_name: string
   folder_link: string
   status: uploadRequestStatusType
-  user: string
+  user: number
   slug: string
   updated_at: string
   created_at: string
+}
+
+export interface IUploadRequestForm {
+  playlist_link: string
+  folder_link: string
 }

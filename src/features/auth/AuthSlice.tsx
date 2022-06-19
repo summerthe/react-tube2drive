@@ -13,10 +13,13 @@ const authSlice = createSlice({
     setAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload
     },
+    resetAuthState: () => {
+      return initialState
+    },
   },
 })
 
-export const { setAuthenticated } = authSlice.actions
+export const { setAuthenticated, resetAuthState } = authSlice.actions
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const selectAuth = (state: RootState) => state.auth
 export default authSlice.reducer
