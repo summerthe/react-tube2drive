@@ -2,6 +2,7 @@
 @import './variables';
 @import './font-faces';
 @import './mixins';
+@import './animations';
 html,
 body {
   background-color: $bg-color;
@@ -196,7 +197,7 @@ main {
       max-width: 94%;
     }
     table {
-      min-width: 540px;
+      min-width: 640px;
       table-layout: fixed;
       width: 100%;
       thead,
@@ -210,6 +211,7 @@ main {
           th {
             padding-top: 14px;
             padding-bottom: 14px;
+            vertical-align: middle;
             @include get-font(
               'Nunito',
               14px,
@@ -232,7 +234,7 @@ main {
                 text-decoration: none;
                 &:focus,
                 &:active {
-                  outline: 1px solid $outline-color;
+                  outline: 4px solid $outline-color;
                 }
               }
               .title {
@@ -256,6 +258,18 @@ main {
               &.failed {
                 color: #fb2f41;
                 background: #38232e;
+              }
+            }
+            button.action {
+              @extend .btn;
+              background-color: transparent;
+              padding: 8px;
+              height: 40px;
+              border-radius: 6px;
+              border-color: transparent;
+              svg {
+                width: 100%;
+                height: 100%;
               }
             }
           }

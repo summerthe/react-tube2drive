@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import axios, { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -20,6 +20,7 @@ import utils from '../../utils'
 function Create(): JSX.Element {
   const dispatch = useAppDispatch()
   const { register, handleSubmit } = useForm<IUploadRequestForm>()
+  const [loading, setLoading] = useState(false)
 
   const [errors, setErrors] = useState<IUploadRequestForm>({
     playlist_link: '',
@@ -34,7 +35,20 @@ function Create(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const hitCreateRequest = (axiosConfig: AxiosRequestConfig): void => {
+  const hitCreateRequest = (data: string): void => {
+    setLoading(true)
+    const accessToken = localStorage.getItem('access')
+
+    const axiosConfig = {
+      method: 'post',
+      url: `${constants.API_URL}/tube2drive/upload-requests/`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      data,
+    }
+
     axios(axiosConfig)
       .then(response => response.data)
       .then((response: IUploadRequest) => {
@@ -42,11 +56,12 @@ function Create(): JSX.Element {
         navigate(constants.pages.INDEX.path)
       })
       .catch(async error => {
+        setLoading(false)
         if (error?.response?.status === 401) {
           const didRefresh = await utils.refreshToken()
           if (didRefresh) {
             // call `hitCreateRequest` again with new token
-            hitCreateRequest(axiosConfig)
+            hitCreateRequest(data)
           } else {
             // redirect to login page
             localStorage.removeItem('refresh')
@@ -56,6 +71,18 @@ function Create(): JSX.Element {
             dispatch(resetAuthState())
             navigate(constants.pages.LOGIN.path)
           }
+        } else if (error?.response?.status === 400) {
+          if (error?.response?.data?.playlist_link?.length > 0) {
+            setErrors({
+              playlist_link: error.response.data.playlist_link[0],
+              folder_link: '',
+            })
+          } else if (error?.response?.data?.folder_link?.length > 0) {
+            setErrors({
+              folder_link: error.response.data.folder_link[0],
+              playlist_link: '',
+            })
+          }
         }
       })
   }
@@ -64,18 +91,7 @@ function Create(): JSX.Element {
     // empty errors
     setErrors({ playlist_link: '', folder_link: '' })
     const data = JSON.stringify(formData)
-    const accessToken = localStorage.getItem('access')
-
-    const config = {
-      method: 'post',
-      url: `${constants.API_URL}/tube2drive/upload-requests/`,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      data,
-    }
-    hitCreateRequest(config)
+    hitCreateRequest(data)
   }
 
   return (
@@ -96,6 +112,7 @@ function Create(): JSX.Element {
                   {...register('playlist_link', {
                     required: true,
                   })}
+                  aria-invalid={errors.playlist_link ? 'true' : 'false'}
                 />
                 {errors.playlist_link && (
                   <span role="alert" className="error-item">
@@ -109,6 +126,7 @@ function Create(): JSX.Element {
                   type="url"
                   id="folder_link"
                   placeholder="https://drive.google.com/drive/folders/1-U4HGXnc23bCKyCpGXSj4ImPVpub821"
+                  aria-invalid={errors.folder_link ? 'true' : 'false'}
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...register('folder_link', {
                     required: true,
@@ -129,8 +147,29 @@ function Create(): JSX.Element {
                 </ul>
               </div>
               <div className="input-container">
-                <button className="btn btn-primary btn-100" type="submit">
-                  Submit
+                <button
+                  className="btn btn-primary btn-100"
+                  type="submit"
+                  disabled={loading}>
+                  {loading ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 loading"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}>
+                      <title>Submitting data</title>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 
+                      11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      />
+                    </svg>
+                  ) : (
+                    'Submit'
+                  )}
                 </button>
               </div>
             </div>

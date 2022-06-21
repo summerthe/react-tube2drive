@@ -30,8 +30,16 @@
     background-color: #5739cf;
     border-color: #5739cf;
   }
-  &:focus {
+  &:focus,
+  &:active {
     outline: 4px solid #5739cf;
+  }
+  &:disabled {
+    outline: none;
+    cursor: not-allowed;
+  }
+  svg.loading {
+    height: 100%;
   }
 }
 .btn-100 {

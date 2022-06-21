@@ -13,6 +13,7 @@ import utils from '../../utils'
 
 function Login(): JSX.Element {
   const dispatch = useAppDispatch()
+  const [loading, setLoading] = useState(false)
 
   const [errors, setErrors] = useState<ILoginForm>({
     email: '',
@@ -41,6 +42,7 @@ function Login(): JSX.Element {
 
   const onSubmit: SubmitHandler<ILoginForm> = formData => {
     // empty errors
+    setLoading(true)
     setErrors({ email: '', password: '' })
     const data = JSON.stringify(formData)
 
@@ -56,6 +58,7 @@ function Login(): JSX.Element {
     axios(config)
       .then(response => response.data)
       .then((response: ILoginFormResponse) => {
+        setLoading(false)
         // if login success, set access and refresh token
         localStorage.setItem('access', response.access)
         localStorage.setItem('refresh', response.refresh)
@@ -63,6 +66,7 @@ function Login(): JSX.Element {
         dispatch(setAuthenticated(true))
       })
       .catch(error => {
+        setLoading(false)
         // if fails show error
         if (error?.response?.status === 401) {
           if (error?.response?.data?.detail) {
@@ -86,6 +90,7 @@ function Login(): JSX.Element {
                   type="email"
                   id="email"
                   placeholder="use `email@gmail.com` for testing"
+                  aria-invalid={errors.email ? 'true' : 'false'}
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...register('email', {
                     required: true,
@@ -98,6 +103,7 @@ function Login(): JSX.Element {
                   id="password"
                   type="password"
                   placeholder="use `password` for testing"
+                  aria-invalid={errors.password ? 'true' : 'false'}
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...register('password', {
                     required: true,
@@ -110,8 +116,29 @@ function Login(): JSX.Element {
                 )}
               </div>
               <div className="input-container">
-                <button className="btn btn-primary btn-100" type="submit">
-                  Submit
+                <button
+                  className="btn btn-primary btn-100"
+                  type="submit"
+                  disabled={loading}>
+                  {loading ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 loading"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}>
+                      <title>Submitting data</title>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 
+                      11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      />
+                    </svg>
+                  ) : (
+                    'Submit'
+                  )}
                 </button>
               </div>
             </div>

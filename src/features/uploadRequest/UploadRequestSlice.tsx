@@ -23,6 +23,11 @@ const uploadRequestSlice = createSlice({
     appendUploadRequests: (state, action: PayloadAction<IUploadRequest>) => {
       state.uploadRequests.unshift(action.payload)
     },
+    removeUploadRequests: (state, action: PayloadAction<number>) => {
+      state.uploadRequests = state.uploadRequests.filter(
+        uploadRequest => uploadRequest.id !== action.payload
+      )
+    },
     resetUploadRequestState: () => {
       return initialState
     },
@@ -33,6 +38,7 @@ export const {
   setUploadRequests,
   setFetched,
   appendUploadRequests,
+  removeUploadRequests,
   resetUploadRequestState,
 } = uploadRequestSlice.actions
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

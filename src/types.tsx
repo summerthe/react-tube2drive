@@ -17,7 +17,7 @@ export interface IAccessTokenResponse {
 }
 
 export default interface IUploadRequest {
-  id: string
+  id: number
   guid: string
   playlist_link: string
   playlist_name: string
