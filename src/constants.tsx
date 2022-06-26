@@ -1,7 +1,8 @@
 const constants = {
-  API_URL: import.meta.env.VITE_REACT_APP_API_URL,
-  driveServiceAccountEmail: import.meta.env
-    .VITE_REACT_APP_DRIVE_SERVICE_ACCOUNT_EMAIL,
+  API_URL: import.meta.env.VITE_API_URL,
+  driveServiceAccountEmail: import.meta.env.VITE_DRIVE_SERVICE_ACCOUNT_EMAIL,
+  apiTestUserEmail: import.meta.env.VITE_API_TEST_USER_EMAIL,
+  apiTestUserPassword: import.meta.env.VITE_API_TEST_USER_PASSWORD,
   uploadRequestStatus: {
     COMPLETED: 'COMPLETED',
     FOLDER_NOT_FOUND: 'FOLDER_NOT_FOUND',

@@ -89,7 +89,7 @@ function Login(): JSX.Element {
                 <input
                   type="email"
                   id="email"
-                  placeholder="use `email@gmail.com` for testing"
+                  placeholder={`use \`${constants.apiTestUserEmail}\` for test user`}
                   aria-invalid={errors.email ? 'true' : 'false'}
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...register('email', {
@@ -102,7 +102,7 @@ function Login(): JSX.Element {
                 <input
                   id="password"
                   type="password"
-                  placeholder="use `password` for testing"
+                  placeholder={`use \`${constants.apiTestUserPassword}\` for test user`}
                   aria-invalid={errors.password ? 'true' : 'false'}
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...register('password', {
