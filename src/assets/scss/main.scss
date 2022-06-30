@@ -114,6 +114,9 @@ main {
       margin-left: 12px;
       margin-right: 12px;
     }
+    h2 {
+      @include get-font('Nunito', 25px);
+    }
     form {
       h2 {
         @include get-font('Nunito', 25px);

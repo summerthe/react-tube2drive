@@ -46,6 +46,13 @@ const constants = {
       subheader: '',
       path: '/logout/',
     },
+    NOT_FOUND: {
+      key: 'NOT_FOUND',
+      title: 'Page Not Found.',
+      header: 'Page Not Found.',
+      subheader: '',
+      path: '*',
+    },
     CREATE: {
       key: 'CREATE',
       title: 'Create new request',

@@ -7,6 +7,7 @@ import Create from '../../pages/Create/Create'
 import Index from '../../pages/Index/Index'
 import Login from '../../pages/Login/Login'
 import Logout from '../../pages/Logout/Logout'
+import NotFound from '../../pages/NotFound/NotFound'
 
 function AppRoutes(): JSX.Element {
   return (
@@ -24,6 +25,8 @@ function AppRoutes(): JSX.Element {
             <Route index element={<Index />} />
             <Route path={constants.pages.CREATE.path} element={<Create />} />
           </Route>
+          {/* Not found page */}
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
