@@ -12,25 +12,18 @@ function AppRoutes(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={constants.pages.INDEX.path} element={<App />}>
-          <Route
-            index
-            element={
-              <ProtectedRoutes>
-                <Index />
-              </ProtectedRoutes>
-            }
-          />
+        <Route element={<App />}>
+          {/* Public Login and logout routes */}
           <Route path={constants.pages.LOGIN.path} element={<Login />} />
           <Route path={constants.pages.LOGOUT.path} element={<Logout />} />
+
+          {/* Protected routes */}
           <Route
-            path={constants.pages.CREATE.path}
-            element={
-              <ProtectedRoutes>
-                <Create />
-              </ProtectedRoutes>
-            }
-          />
+            path={constants.pages.INDEX.path}
+            element={<ProtectedRoutes />}>
+            <Route index element={<Index />} />
+            <Route path={constants.pages.CREATE.path} element={<Create />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
