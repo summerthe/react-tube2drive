@@ -215,6 +215,8 @@ main {
             padding-top: 14px;
             padding-bottom: 14px;
             vertical-align: middle;
+            overflow: hidden;
+            text-overflow: ellipsis;
             @include get-font(
               'Nunito',
               14px,
