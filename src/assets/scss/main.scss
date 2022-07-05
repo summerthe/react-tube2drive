@@ -214,9 +214,11 @@ main {
           th {
             padding-top: 14px;
             padding-bottom: 14px;
+            padding-left: 8px;
             vertical-align: middle;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            &:first-child{
+              overflow: hidden;
+            }
             @include get-font(
               'Nunito',
               14px,
