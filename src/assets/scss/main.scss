@@ -130,7 +130,8 @@ main {
             display: block;
             margin: 8px 0;
           }
-          input {
+          input,
+          select {
             display: flex;
             flex-direction: row;
             align-items: center;

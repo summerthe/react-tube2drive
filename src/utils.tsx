@@ -31,5 +31,13 @@ const utils = {
         return false
       })
   },
+  toTitleCase: (_string: string): string => {
+    const sentence = _string.toLowerCase().split(' ')
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < sentence.length; i++) {
+      sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1)
+    }
+    return sentence.join(' ')
+  },
 }
 export default utils

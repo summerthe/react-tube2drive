@@ -14,7 +14,10 @@ import {
   resetUploadRequestState,
 } from '../../features/uploadRequest/UploadRequestSlice'
 import { useAppDispatch } from '../../store'
-import IUploadRequest, { IUploadRequestForm } from '../../types'
+import IUploadRequest, {
+  IUploadRequestForm,
+  IUploadRequestFormError,
+} from '../../types'
 import utils from '../../utils'
 
 function Create(): JSX.Element {
@@ -22,8 +25,9 @@ function Create(): JSX.Element {
   const { register, handleSubmit } = useForm<IUploadRequestForm>()
   const [loading, setLoading] = useState(false)
 
-  const [errors, setErrors] = useState<IUploadRequestForm>({
+  const [errors, setErrors] = useState<IUploadRequestFormError>({
     youtube_link: '',
+    youtube_entity_type: '',
     folder_link: '',
   })
   const navigate = useNavigate()
@@ -76,11 +80,13 @@ function Create(): JSX.Element {
             setErrors({
               youtube_link: error.response.data.youtube_link[0],
               folder_link: '',
+              youtube_entity_type: '',
             })
           } else if (error?.response?.data?.folder_link?.length > 0) {
             setErrors({
               folder_link: error.response.data.folder_link[0],
               youtube_link: '',
+              youtube_entity_type: '',
             })
           }
         }
@@ -89,7 +95,7 @@ function Create(): JSX.Element {
 
   const onSubmit: SubmitHandler<IUploadRequestForm> = formData => {
     // empty errors
-    setErrors({ youtube_link: '', folder_link: '' })
+    setErrors({ youtube_link: '', folder_link: '', youtube_entity_type: '' })
     const data = JSON.stringify(formData)
     hitCreateRequest(data)
   }
@@ -121,6 +127,27 @@ function Create(): JSX.Element {
                 )}
               </div>
               <div className="input-container">
+                <label htmlFor="youtube_entity_type">Youtube Entity</label>
+                <select
+                  id="youtube_entity_type"
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...register('youtube_entity_type', {
+                    required: true,
+                  })}
+                  aria-invalid={errors.youtube_entity_type ? 'true' : 'false'}>
+                  {Object.entries(constants.youtubeEntity).map(t => (
+                    <option key={t[0]} value={t[0]} className="title-case">
+                      {utils.toTitleCase(t[1])}
+                    </option>
+                  ))}
+                </select>
+                {errors.youtube_entity_type && (
+                  <span role="alert" className="error-item">
+                    {errors.youtube_entity_type}
+                  </span>
+                )}
+              </div>
+              <div className="input-container">
                 <label htmlFor="folder_link">Folder link</label>
                 <input
                   type="url"
@@ -141,7 +168,7 @@ function Create(): JSX.Element {
               <div className="notes">
                 <ul>
                   <li>
-                    Make sure your gdrive folder is shared with{' '}
+                    Make sure your google drive folder is shared with{' '}
                     <em tabIndex={0}>{constants.driveServiceAccountEmail}</em>
                   </li>
                 </ul>

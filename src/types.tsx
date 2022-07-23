@@ -1,6 +1,7 @@
 import constants from './constants'
 
 type uploadRequestStatusType = keyof typeof constants.uploadRequestStatus
+type youtubeEntityType = keyof typeof constants.youtubeEntity
 
 export interface ILoginForm {
   email: string
@@ -31,5 +32,11 @@ export default interface IUploadRequest {
 
 export interface IUploadRequestForm {
   youtube_link: string
+  youtube_entity_type: youtubeEntityType
+  folder_link: string
+}
+export interface IUploadRequestFormError {
+  youtube_link: string
+  youtube_entity_type: string
   folder_link: string
 }
