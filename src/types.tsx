@@ -18,9 +18,9 @@ export interface IAccessTokenResponse {
 
 export default interface IUploadRequest {
   id: number
-  guid: string
-  playlist_link: string
-  playlist_name: string
+  unique_identifier: string
+  youtube_link: string
+  youtube_entity_name: string
   folder_link: string
   status: uploadRequestStatusType
   user: number
@@ -30,6 +30,6 @@ export default interface IUploadRequest {
 }
 
 export interface IUploadRequestForm {
-  playlist_link: string
+  youtube_link: string
   folder_link: string
 }

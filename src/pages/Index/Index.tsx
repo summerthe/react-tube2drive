@@ -162,15 +162,15 @@ function Index(): JSX.Element {
                 </tr>
               ) : (
                 uploadRequests.map(record => (
-                  <tr key={record.guid}>
+                  <tr key={record.unique_identifier}>
                     <td>
                       <div className="stack">
                         <a
-                          href={record.playlist_link}
+                          href={record.youtube_link}
                           target="_blank"
                           className="title external"
                           rel="noreferrer nofollow">
-                          {record.playlist_name}
+                          {record.youtube_entity_name}
                         </a>
                       </div>
                     </td>

@@ -23,7 +23,7 @@ function Create(): JSX.Element {
   const [loading, setLoading] = useState(false)
 
   const [errors, setErrors] = useState<IUploadRequestForm>({
-    playlist_link: '',
+    youtube_link: '',
     folder_link: '',
   })
   const navigate = useNavigate()
@@ -72,15 +72,15 @@ function Create(): JSX.Element {
             navigate(constants.pages.LOGIN.path)
           }
         } else if (error?.response?.status === 400) {
-          if (error?.response?.data?.playlist_link?.length > 0) {
+          if (error?.response?.data?.youtube_link?.length > 0) {
             setErrors({
-              playlist_link: error.response.data.playlist_link[0],
+              youtube_link: error.response.data.youtube_link[0],
               folder_link: '',
             })
           } else if (error?.response?.data?.folder_link?.length > 0) {
             setErrors({
               folder_link: error.response.data.folder_link[0],
-              playlist_link: '',
+              youtube_link: '',
             })
           }
         }
@@ -89,7 +89,7 @@ function Create(): JSX.Element {
 
   const onSubmit: SubmitHandler<IUploadRequestForm> = formData => {
     // empty errors
-    setErrors({ playlist_link: '', folder_link: '' })
+    setErrors({ youtube_link: '', folder_link: '' })
     const data = JSON.stringify(formData)
     hitCreateRequest(data)
   }
@@ -103,25 +103,25 @@ function Create(): JSX.Element {
             <h2>{constants.pages.CREATE.subheader}</h2>
             <div className="inputs">
               <div className="input-container">
-                <label htmlFor="playlist_link">Playlist</label>
+                <label htmlFor="youtube_link">Youtube link</label>
                 <input
                   type="url"
-                  id="playlist_link"
+                  id="youtube_link"
                   placeholder="https://www.youtube.com/playlist?list=PLoel2ZB30FAEdpACztQruvIujFxz0s4wS"
                   // eslint-disable-next-line react/jsx-props-no-spreading
-                  {...register('playlist_link', {
+                  {...register('youtube_link', {
                     required: true,
                   })}
-                  aria-invalid={errors.playlist_link ? 'true' : 'false'}
+                  aria-invalid={errors.youtube_link ? 'true' : 'false'}
                 />
-                {errors.playlist_link && (
+                {errors.youtube_link && (
                   <span role="alert" className="error-item">
-                    {errors.playlist_link}
+                    {errors.youtube_link}
                   </span>
                 )}
               </div>
               <div className="input-container">
-                <label htmlFor="folder_link">Folder</label>
+                <label htmlFor="folder_link">Folder link</label>
                 <input
                   type="url"
                   id="folder_link"

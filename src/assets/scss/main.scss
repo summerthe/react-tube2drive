@@ -216,7 +216,7 @@ main {
             padding-bottom: 14px;
             padding-left: 8px;
             vertical-align: middle;
-            &:first-child{
+            &:first-child {
               overflow: hidden;
             }
             @include get-font(
