@@ -60,10 +60,12 @@ function Login(): JSX.Element {
       .then((response: ILoginFormResponse) => {
         setLoading(false)
         // if login success, set access and refresh token
+        const userUuid = response.user.unique_identifier
         localStorage.setItem('access', response.access)
         localStorage.setItem('refresh', response.refresh)
+        localStorage.setItem('userUuid', userUuid)
         // set setAuthenticated in store
-        dispatch(setAuthenticated(true))
+        dispatch(setAuthenticated({ isAuthenticated: true, userUuid }))
       })
       .catch(error => {
         setLoading(false)

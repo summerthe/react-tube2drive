@@ -11,6 +11,9 @@ export interface ILoginForm {
 export interface ILoginFormResponse {
   refresh: string
   access: string
+  user: {
+    unique_identifier: string
+  }
 }
 
 export interface IAccessTokenResponse {

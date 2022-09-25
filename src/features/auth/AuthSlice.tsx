@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
 
-const getInitialState = (): { isAuthenticated: boolean } => {
+const getInitialState = (): {
+  isAuthenticated: boolean
+  userUuid: string | null
+} => {
   return {
     isAuthenticated: !!localStorage.getItem('access'),
+    userUuid: localStorage.getItem('userUuid'),
   }
 }
 
@@ -13,8 +17,15 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuthenticated: (state, action: PayloadAction<boolean>) => {
-      state.isAuthenticated = action.payload
+    setAuthenticated: (
+      state,
+      action: PayloadAction<{
+        isAuthenticated: boolean
+        userUuid: string | null
+      }>
+    ) => {
+      state.isAuthenticated = action.payload.isAuthenticated
+      state.userUuid = action.payload.userUuid
     },
     resetAuthState: () => {
       return getInitialState()

@@ -11,6 +11,7 @@ function Logout(): JSX.Element {
   useEffect(() => {
     localStorage.removeItem('access')
     localStorage.removeItem('refresh')
+    localStorage.removeItem('userUuid')
     // remove current user's every state
     dispatch(resetUploadRequestState())
     dispatch(resetAuthState())

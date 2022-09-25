@@ -17,6 +17,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../store'
 import IUploadRequest from '../../types'
 import utils from '../../utils'
+import WebsocketRequestUpdate from '../../Websocket/RequestUpdate/RequestUpdate'
 
 function Index(): JSX.Element {
   const tableColumns = ['Youtube', 'Drive', 'Status', 'Last Updated', 'Created']
@@ -53,6 +54,7 @@ function Index(): JSX.Element {
             // redirect to login page
             localStorage.removeItem('refresh')
             localStorage.removeItem('access')
+            localStorage.removeItem('userUuid')
             // remove current user's every state
             dispatch(resetUploadRequestState())
             dispatch(resetAuthState())
@@ -88,6 +90,7 @@ function Index(): JSX.Element {
             // redirect to login page
             localStorage.removeItem('refresh')
             localStorage.removeItem('access')
+            localStorage.removeItem('userUuid')
             // remove current user's every state
             dispatch(resetUploadRequestState())
             dispatch(resetAuthState())
@@ -103,6 +106,8 @@ function Index(): JSX.Element {
     dispatch(setCurrentPageKey(currentPage))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  WebsocketRequestUpdate()
 
   useEffect(() => {
     // hit api only if didnt hit it before

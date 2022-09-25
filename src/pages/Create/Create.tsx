@@ -70,6 +70,7 @@ function Create(): JSX.Element {
             // redirect to login page
             localStorage.removeItem('refresh')
             localStorage.removeItem('access')
+            localStorage.removeItem('userUuid')
             // remove current user's every state
             dispatch(resetUploadRequestState())
             dispatch(resetAuthState())
