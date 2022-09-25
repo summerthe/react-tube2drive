@@ -41,6 +41,9 @@ const uploadRequestSlice = createSlice({
       )
       if (uploadRequestsIndex !== -1) {
         state.uploadRequests[uploadRequestsIndex] = action.payload
+      } else {
+        // if request is not found, just append it.
+        state.uploadRequests.unshift(action.payload)
       }
     },
 
